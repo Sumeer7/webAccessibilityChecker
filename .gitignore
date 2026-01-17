@@ -10,10 +10,10 @@ build/
 
 # Reports (but keep example outputs)
 reports/
-!examples/outputs/
-examples/outputs/*.json
-examples/outputs/*.csv
-examples/outputs/*.html
+/report.json
+/report.csv
+/report.html
+accessibility-report.*
 
 # Environment
 .env
