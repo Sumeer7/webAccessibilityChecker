@@ -2,9 +2,11 @@
 
 A professional, open-source CLI tool for running comprehensive web accessibility audits using [axe-core](https://github.com/dequelabs/axe-core). Quickly identify WCAG violations, missing alt text, color contrast issues, ARIA problems, and more.
 
+[![CI](https://github.com/Sumeer7/webAccessibilityChecker/workflows/CI/badge.svg)](https://github.com/Sumeer7/webAccessibilityChecker/actions)
 [![npm version](https://img.shields.io/npm/v/web-accessibility-checker.svg)](https://www.npmjs.com/package/web-accessibility-checker)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
 
 ---
 
