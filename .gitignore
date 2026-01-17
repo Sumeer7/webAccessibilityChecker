@@ -8,11 +8,12 @@ dist/
 build/
 *.tsbuildinfo
 
-# Reports
+# Reports (but keep example outputs)
 reports/
-*.json
-*.csv
-*.html
+!examples/outputs/
+examples/outputs/*.json
+examples/outputs/*.csv
+examples/outputs/*.html
 
 # Environment
 .env
