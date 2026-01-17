@@ -1,0 +1,100 @@
+name: Accessibility Check
+
+# Example workflow for using Web Accessibility Checker in CI/CD
+# This can be used to check your deployed site for accessibility issues
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily at 9 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL to check'
+        required: true
+        default: 'https://example.com'
+
+jobs:
+  accessibility-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    
+    - name: Install Web Accessibility Checker
+      run: npm install -g web-accessibility-checker
+    
+    - name: Install Playwright browsers
+      run: npx playwright install chromium --with-deps
+    
+    - name: Run accessibility scan
+      id: a11y_scan
+      run: |
+        URL="${{ github.event.inputs.url || 'https://example.com' }}"
+        mkdir -p reports
+        web-accessibility-checker "$URL" \
+          --output ./reports/accessibility-report.json \
+          --csv \
+          --screenshot || echo "exit_code=$?" >> $GITHUB_OUTPUT
+    
+    - name: Upload accessibility report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: accessibility-report
+        path: reports/
+        retention-days: 30
+    
+    - name: Comment PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const reportPath = './reports/accessibility-report.json';
+          
+          if (fs.existsSync(reportPath)) {
+            const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+            const summary = report.summary;
+            
+            const comment = `## 🔍 Accessibility Scan Results
+            
+            **URL:** ${report.metadata.url}
+            **Scanned at:** ${report.metadata.scannedAt}
+            
+            ### Summary
+            - Total Issues: **${summary.totalViolations}**
+            - Critical: ${summary.critical} 🔴
+            - Serious: ${summary.serious} 🟠
+            - Moderate: ${summary.moderate} 🟡
+            - Minor: ${summary.minor} 🔵
+            
+            ### Test Results
+            - ✅ Passed: ${summary.passes}
+            - ⚠️ Incomplete: ${summary.incomplete}
+            - ➖ Not Applicable: ${summary.inapplicable}
+            
+            [Download full report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          }
+    
+    - name: Fail if critical issues found
+      if: steps.a11y_scan.outputs.exit_code == '2'
+      run: |
+        echo "❌ Critical accessibility issues found!"
+        exit 1
+
