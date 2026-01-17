@@ -1,0 +1,11 @@
+Type,Rule ID,Impact,Description,Element,Selector,Details
+Violation,color-contrast,serious,Elements must have sufficient color contrast,<a href="/about">About Us</a>,"nav > a:nth-child(2)","Insufficient color contrast of 3.2:1 (expected 4.5:1)"
+Violation,image-alt,critical,Images must have alternate text,<img src="logo.png">,"header > img","Element does not have an alt attribute"
+Violation,label,critical,Form elements must have labels,"<input type=""email"" name=""email"" placeholder=""Enter email"">","form > input[type=""email""]","Form element does not have a label"
+Violation,button-name,critical,Buttons must have discernible text,<button><i class="icon-search"></i></button>,"#search-btn","Element does not have inner text visible to screen readers"
+Violation,link-name,serious,Links must have discernible text,<a href="/home"><span class="icon"></span></a>,"footer a:nth-child(1)","Element is in tab order and does not have accessible text"
+Pass,document-title,n/a,Documents must have <title> element,n/a,n/a,n/a
+Pass,html-has-lang,n/a,<html> element must have a lang attribute,n/a,n/a,n/a
+Pass,landmark-one-main,n/a,Document should have one main landmark,n/a,n/a,n/a
+Incomplete,color-contrast,serious,Elements must have sufficient color contrast,<p class="overlay-text">Welcome</p>,".hero > p","Background color could not be determined due to background image"
+

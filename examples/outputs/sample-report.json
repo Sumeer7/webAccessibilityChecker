@@ -1,0 +1,123 @@
+{
+  "url": "https://example.com",
+  "timestamp": "2026-01-15T10:30:00.000Z",
+  "wcagLevel": "AA",
+  "summary": {
+    "violations": 5,
+    "passes": 42,
+    "incomplete": 2,
+    "inapplicable": 15
+  },
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+      "help": "Elements must have sufficient color contrast",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast",
+      "nodes": [
+        {
+          "html": "<a href=\"/about\">About Us</a>",
+          "target": ["nav > a:nth-child(2)"],
+          "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.2:1 (foreground color: #777777, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+        }
+      ]
+    },
+    {
+      "id": "image-alt",
+      "impact": "critical",
+      "description": "Ensures <img> elements have alternate text or a role of none or presentation",
+      "help": "Images must have alternate text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/image-alt",
+      "nodes": [
+        {
+          "html": "<img src=\"logo.png\">",
+          "target": ["header > img"],
+          "failureSummary": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "id": "label",
+      "impact": "critical",
+      "description": "Ensures every form element has a label",
+      "help": "Form elements must have labels",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/label",
+      "nodes": [
+        {
+          "html": "<input type=\"email\" name=\"email\" placeholder=\"Enter email\">",
+          "target": ["form > input[type=\"email\"]"],
+          "failureSummary": "Fix any of the following:\n  Form element does not have an implicit (wrapped) <label>\n  Form element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute"
+        }
+      ]
+    },
+    {
+      "id": "button-name",
+      "impact": "critical",
+      "description": "Ensures buttons have discernible text",
+      "help": "Buttons must have discernible text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/button-name",
+      "nodes": [
+        {
+          "html": "<button><i class=\"icon-search\"></i></button>",
+          "target": ["#search-btn"],
+          "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+        }
+      ]
+    },
+    {
+      "id": "link-name",
+      "impact": "serious",
+      "description": "Ensures links have discernible text",
+      "help": "Links must have discernible text",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/link-name",
+      "nodes": [
+        {
+          "html": "<a href=\"/home\"><span class=\"icon\"></span></a>",
+          "target": ["footer a:nth-child(1)"],
+          "failureSummary": "Fix all of the following:\n  Element is in tab order and does not have accessible text"
+        }
+      ]
+    }
+  ],
+  "passes": [
+    {
+      "id": "document-title",
+      "impact": null,
+      "description": "Ensures each HTML document contains a non-empty <title> element",
+      "help": "Documents must have <title> element to aid in navigation",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/document-title"
+    },
+    {
+      "id": "html-has-lang",
+      "impact": null,
+      "description": "Ensures every HTML document has a lang attribute",
+      "help": "<html> element must have a lang attribute",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/html-has-lang"
+    },
+    {
+      "id": "landmark-one-main",
+      "impact": null,
+      "description": "Ensures the document has a main landmark",
+      "help": "Document should have one main landmark",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/landmark-one-main"
+    }
+  ],
+  "incomplete": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+      "help": "Elements must have sufficient color contrast",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/color-contrast",
+      "nodes": [
+        {
+          "html": "<p class=\"overlay-text\">Welcome</p>",
+          "target": [".hero > p"],
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+        }
+      ]
+    }
+  ]
+}
+
